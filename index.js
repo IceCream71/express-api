@@ -25,3 +25,6 @@ app.get('/sum', (req,res) => {
     res.json({'count': data.length})
   })
 })
+
+
+app.listen(3000)
