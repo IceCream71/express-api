@@ -16,7 +16,12 @@ app.use(bodyParser.json());
 app.get('/data/:query', (req, res) => {
   const query = req.params.query
   console.log(query)
-  mongoClient.collection('telegram_data').find({message: new RegExp(query, 'i')}).toArray()
+  mongoClient.collection('telegram_data').find({
+    $or:[
+      {message: new RegExp(query, 'i')},
+      {media.catption: new RegExp(query, 'i')}
+    ]
+  }).toArray()
   .then((data) => {
     console.log(data)
     res.json(data)
