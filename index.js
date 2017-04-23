@@ -18,8 +18,8 @@ app.get('/data/:query', (req, res) => {
   console.log(query)
   mongoClient.collection('telegram_data').find({
     $or:[
-      {message: new RegExp(query, 'i')},
-      {media.catption: new RegExp(query, 'i')}
+      {"message": new RegExp(query, 'i')},
+      {"media.catption": new RegExp(query, 'i')}
     ]
   }).toArray()
   .then((data) => {
